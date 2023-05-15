@@ -1,14 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { PATH } from "@/configs/url";
+import { Sticker } from "@/pages/Sticker";
 
 import "@/styles/_reset.scss";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-
-root.render(
-  <React.StrictMode>
-    <p>asdfsd</p>
-  </React.StrictMode>
+ReactDOM.render(
+  <Router>
+    <Routes>
+      <Route path={PATH.STICKER} Component={Sticker} />
+    </Routes>
+  </Router>,
+  document.getElementById("root")
 );
