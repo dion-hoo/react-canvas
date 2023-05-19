@@ -1,5 +1,6 @@
 {
   "name": "react-canvas",
+  "homepage": "https://dion-hoo.github.io/react-canvas",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +21,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +63,7 @@
     "@storybook/testing-library": "0.0.14-next.2",
     "@types/react-router-config": "^5.0.7",
     "babel-plugin-named-exports-order": "0.0.2",
+    "gh-pages": "^5.0.0",
     "prop-types": "15.8.1",
     "react-app-rewired": "^2.2.1",
     "storybook": "7.0.11",

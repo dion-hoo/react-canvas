@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { PATH } from "@/configs/url";
+import { PATH } from "@/urls/url";
 import { Sticker } from "@/pages/Sticker";
 
 import "@/styles/_reset.scss";

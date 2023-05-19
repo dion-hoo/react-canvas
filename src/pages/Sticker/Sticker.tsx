@@ -19,9 +19,8 @@ const Sticker = () => {
       const banner = bannerRef.current;
 
       if (ctx) {
-        const canvas = new Canvas(canvasElement, ctx, banner);
+        const canvas = Canvas(canvasElement, ctx, banner);
 
-        canvas.eventListener();
         canvas.resize();
         canvas.animate();
 
