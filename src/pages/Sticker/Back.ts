@@ -47,9 +47,9 @@ export class Back {
     );
     ctx.lineTo(this.point[4].x, this.point[4].y);
 
-    if (this.point[4].isAreaY) {
-      ctx.lineTo(this.point[5].x, this.point[5].y);
-    }
+    // if (this.point[4].isAreaY) {
+    //   ctx.lineTo(this.point[5].x, this.point[5].y);
+    // }
     ctx.closePath();
   }
 

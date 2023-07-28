@@ -6,10 +6,9 @@ export const Points = (
   centerX: number,
   centerY: number,
   width: number,
-  height: number
+  height: number,
+  peelOffSize: number
 ) => {
-  const peelOffSize = 100; // 접히는 크기
-
   const PointArray = [
     {
       x: centerX + mousePoint[0].moveX,
