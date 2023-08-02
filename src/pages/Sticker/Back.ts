@@ -21,28 +21,28 @@ export class Back {
   }
 
   update(frontPoint: StickerPoint[]) {
-    this.point[0] = frontPoint[1];
-    this.point[1] = frontPoint[2];
-    this.point[2] = frontPoint[3];
-    this.point[3] = frontPoint[4];
-    this.point[4] = frontPoint[5];
+    this.point[1] = frontPoint[1];
+    this.point[2] = frontPoint[2];
+    this.point[3] = frontPoint[3];
+    this.point[4] = frontPoint[4];
+    this.point[5] = frontPoint[5];
   }
 
   backPath(ctx: CanvasRenderingContext2D) {
     ctx.beginPath();
-    ctx.moveTo(this.point[0].x, this.point[0].y);
+    ctx.moveTo(this.point[1].x, this.point[1].y);
     ctx.quadraticCurveTo(
-      this.point[1].x,
-      this.point[1].y,
       this.point[2].x,
-      this.point[2].y
-    );
-    ctx.lineTo(this.point[2].x, this.point[2].y);
-    ctx.quadraticCurveTo(
+      this.point[2].y,
       this.point[3].x,
-      this.point[3].y,
+      this.point[3].y
+    );
+    ctx.lineTo(this.point[3].x, this.point[3].y);
+    ctx.quadraticCurveTo(
       this.point[4].x,
-      this.point[4].y
+      this.point[4].y,
+      this.point[5].x,
+      this.point[5].y
     );
 
     ctx.closePath();
@@ -52,7 +52,7 @@ export class Back {
     ctx.clip();
 
     ctx.save();
-    ctx.translate(this.point[0].x, this.point[2].y);
+    ctx.translate(this.point[1].x, this.point[3].y);
     ctx.scale(-1, 1);
     ctx.rotate((90 * Math.PI) / 180);
     ctx.drawImage(this.image, -this.width, 0, this.width, this.height);
@@ -62,10 +62,10 @@ export class Back {
 
   drawShadow(ctx: CanvasRenderingContext2D) {
     const gradient = ctx.createLinearGradient(
-      this.point[3].x,
-      this.point[3].y,
-      this.point[3].x,
-      this.point[4].y
+      this.point[4].x,
+      this.point[4].y,
+      this.point[4].x,
+      this.point[5].y
     );
     gradient.addColorStop(0, "rgba(0, 0, 0, 1)");
     gradient.addColorStop(0.6, "rgba(0, 0, 0, 0.3)");
@@ -74,14 +74,14 @@ export class Back {
 
     ctx.beginPath();
 
-    ctx.moveTo(this.point[2].x, this.point[2].y);
+    ctx.moveTo(this.point[3].x, this.point[3].y);
     ctx.quadraticCurveTo(
-      this.point[3].x,
-      this.point[3].y,
       this.point[4].x,
-      this.point[4].y
+      this.point[4].y,
+      this.point[5].x,
+      this.point[5].y
     );
-    ctx.lineTo(this.point[4].x, this.point[4].y);
+    ctx.lineTo(this.point[5].x, this.point[5].y);
     ctx.fill();
 
     ctx.closePath();

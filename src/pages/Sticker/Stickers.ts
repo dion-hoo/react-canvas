@@ -45,7 +45,7 @@ export class Stickers {
       const { x, y } = points[v];
 
       if (v === 0) {
-        ctx.moveTo(points[0].x, points[0].y);
+        ctx.moveTo(x, y);
       } else {
         if (v === 2 || v === 4) {
           ctx.quadraticCurveTo(x, y, points[v + 1].x, points[v + 1].y);
