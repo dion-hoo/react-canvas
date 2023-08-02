@@ -26,7 +26,6 @@ export class Back {
     this.point[2] = frontPoint[3];
     this.point[3] = frontPoint[4];
     this.point[4] = frontPoint[5];
-    this.point[5] = frontPoint[6];
   }
 
   backPath(ctx: CanvasRenderingContext2D) {
@@ -45,11 +44,7 @@ export class Back {
       this.point[4].x,
       this.point[4].y
     );
-    ctx.lineTo(this.point[4].x, this.point[4].y);
 
-    // if (this.point[4].isAreaY) {
-    //   ctx.lineTo(this.point[5].x, this.point[5].y);
-    // }
     ctx.closePath();
   }
 
