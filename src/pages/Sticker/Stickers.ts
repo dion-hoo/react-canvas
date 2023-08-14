@@ -74,14 +74,14 @@ export class Stickers {
     }
 
     // Point
-    // ctx.beginPath();
-    // for (let v = 0; v < points.length; v++) {
-    //   const { x, y } = points[v];
+    ctx.beginPath();
+    for (let v = 0; v < points.length; v++) {
+      const { x, y } = points[v];
 
-    //   ctx.fillStyle = "red";
-    //   ctx.arc(x, y, 5, 0, Math.PI * 2);
-    //   ctx.fill();
-    //   ctx.closePath();
-    // }
+      ctx.fillStyle = "red";
+      ctx.arc(x, y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.closePath();
+    }
   }
 }

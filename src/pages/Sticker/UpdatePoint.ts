@@ -67,12 +67,6 @@ export const updatePoint = (
     }
   };
 
-  // p1
-  setPoint({
-    index: 1,
-    x: maxWidth < height,
-  });
-
   // p2
   setPoint({
     index: 2,
@@ -80,18 +74,25 @@ export const updatePoint = (
     yLerp: minMaxBoundary(lerp(p[1].y, p[3].y, 0.5), minY, maxY),
   });
 
-  // p3
-  setPoint({
-    index: 3,
-    x: maxWidth < height,
-    y: true,
-  });
-
   // p4
   setPoint({
     index: 4,
     xLerp: minMaxBoundary(lerp(p[1].x, p[5].x, 0.6), minX, maxX),
     yLerp: minMaxBoundary(lerp(p[1].y, p[5].y, 0.7), minY, maxY),
+  });
+  const startDown = p[4].y >= maxY - 1;
+
+  // p1
+  setPoint({
+    index: 1,
+    x: maxWidth < height || startDown,
+  });
+
+  // p3
+  setPoint({
+    index: 3,
+    x: maxWidth < height || startDown,
+    y: true,
   });
 
   // p5

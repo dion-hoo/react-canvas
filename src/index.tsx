@@ -1,16 +1,11 @@
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import { PATH } from "@/urls/url";
-import { Sticker } from "@/pages/Sticker";
+import { createRoot } from "react-dom/client";
+import { App } from "./App";
 
 import "@/styles/_reset.scss";
 
-ReactDOM.render(
-  <Router>
-    <Routes>
-      <Route path={PATH.STICKER} Component={Sticker} />
-    </Routes>
-  </Router>,
-  document.getElementById("root")
-);
+const container = document.getElementById("root");
+
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+}
