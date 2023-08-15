@@ -1,4 +1,4 @@
 export const PATH = {
-  METABALL: "/metaball",
+  CONVEXHULL: "/convexHull",
   STICKER: "/sticker",
 };

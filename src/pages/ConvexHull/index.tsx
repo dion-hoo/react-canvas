@@ -2,7 +2,7 @@ import "./index.scss";
 import { Canvas } from "./canvas";
 import { useEffect, useRef } from "react";
 
-const MetaBall = () => {
+const ConvexHull = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const MetaBall = () => {
   );
 };
 
-export default MetaBall;
+export default ConvexHull;
