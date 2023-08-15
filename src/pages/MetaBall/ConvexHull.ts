@@ -85,17 +85,20 @@ export class ConvexHull {
         }
       }
 
+      point.active = false;
       i++;
     }
 
     // 선분 그리기
-    ctx.strokeStyle = "#fff";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
     ctx.beginPath();
 
     for (let i = 0; i < stack.length; i++) {
       const point = stack[i];
 
       ctx.lineTo(point.x, point.y);
+
+      point.active = true;
     }
 
     ctx.lineTo(stack[0].x, stack[0].y);
