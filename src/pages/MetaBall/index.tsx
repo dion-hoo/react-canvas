@@ -12,11 +12,22 @@ const MetaBall = () => {
 
       const c = new Canvas(canvas, ctx);
       c.draw();
+
+      window.addEventListener("resize", () => {
+        c.resize();
+        c.draw();
+      });
+
+      return () => {
+        window.removeEventListener("resize", () => {
+          c.resize();
+          c.draw();
+        });
+      };
     }
   }, []);
   return (
     <div className="wrap">
-      <h1>Convex Hull을 이용한 울타리</h1>
       <canvas id="canvas" ref={canvasRef}></canvas>
     </div>
   );

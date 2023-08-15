@@ -1,5 +1,5 @@
 import { Point } from "./Point";
-import { Line } from "./Line";
+import { ConvexHull } from "./ConvexHull";
 
 export class Canvas {
   canvas: HTMLCanvasElement;
@@ -11,7 +11,7 @@ export class Canvas {
     this.canvas = canvas;
     this.ctx = ctx;
     this.points = [];
-    this.radius = 5;
+    this.radius = 10;
 
     this.init();
     this.resize();
@@ -30,19 +30,14 @@ export class Canvas {
   }
 
   resize() {
-    const HEADERHEIGHT = 150;
-
     this.points = [];
     for (let i = 0; i < 10; i++) {
-      const x = Math.random() * (window.innerWidth - this.radius) + this.radius;
+      const x =
+        Math.random() * (window.innerWidth - this.radius * 2) + this.radius;
       const y =
-        Math.random() * (window.innerHeight - this.radius - HEADERHEIGHT) +
-        this.radius +
-        HEADERHEIGHT;
+        Math.random() * (window.innerHeight - this.radius * 2) + this.radius;
 
       this.points.push(new Point(i, x, y, this.radius));
-
-      window.addEventListener("resize", this.init.bind(this));
     }
   }
 
@@ -55,9 +50,9 @@ export class Canvas {
       point.windowCoolide();
     });
 
-    const line = new Line(this.points);
-    line.draw(this.ctx);
+    const convexHull = new ConvexHull(this.points);
+    convexHull.draw(this.ctx);
 
-    // requestAnimationFrame(this.draw.bind(this));
+    //requestAnimationFrame(this.draw.bind(this));
   }
 }

@@ -11,16 +11,13 @@ export class Point {
     this.index = index;
     this.x = x;
     this.y = y;
-    this.vx = 0;
-    this.vy = 0;
+    this.vx = Math.random() * 2 - 1.5;
+    this.vy = Math.random() * 2 - 1.5;
     this.radius = radius;
     this.angle = 0;
   }
 
   update() {
-    this.vx += 0.001;
-    this.vy += 0.001;
-
     this.x += this.vx;
     this.y += this.vy;
   }
@@ -36,14 +33,14 @@ export class Point {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "#fff";
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fill();
     ctx.closePath();
 
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "green";
     ctx.font = "20px system-ui";
-    ctx.fillText(`${this.index}`, this.x, this.y);
+    ctx.fillText(`${this.index}`, this.x + 12, this.y);
   }
 }

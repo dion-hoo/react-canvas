@@ -5,7 +5,7 @@ type PointType = {
   y: number;
 };
 
-export class Line {
+export class ConvexHull {
   points: Point[];
 
   constructor(points: Point[]) {
@@ -55,55 +55,52 @@ export class Line {
     });
 
     // 외적을 이용해서 반시계 방향 찾아내기
-    const stack = [];
-    const pointsLength = this.points.length - 1;
+    let i = 0;
+    const stack: Point[] = [];
 
-    ctx.strokeStyle = "red";
+    while (i < this.points.length) {
+      // 비교할 기존 포인트들
+      const point = this.points[i];
+
+      // stack에 벡터가 2개 이하일떄
+      if (stack.length < 2) {
+        stack.push(point);
+      } else {
+        const prevMorePoint = stack[stack.length - 2];
+        const prevPoint = stack[stack.length - 1];
+
+        const crossPoduct =
+          (prevPoint.x - prevMorePoint.x) * (point.y - prevMorePoint.y) -
+          (point.x - prevMorePoint.x) * (prevPoint.y - prevMorePoint.y);
+
+        // ccw
+        if (crossPoduct < 0) {
+          stack.push(point);
+        }
+
+        // cw
+        if (crossPoduct > 0) {
+          stack.pop();
+          i--;
+        }
+      }
+
+      i++;
+    }
+
+    // 선분 그리기
+    ctx.strokeStyle = "#fff";
     ctx.beginPath();
 
-    console.log(this.points);
+    for (let i = 0; i < stack.length; i++) {
+      const point = stack[i];
 
-    for (let i = 0; i < pointsLength; i++) {
-      if (i > pointsLength - 2) {
-        ctx.lineTo(this.points[i + 1].x, this.points[i + 1].y);
-        ctx.lineTo(this.points[0].x, this.points[0].y);
-        break;
-      }
-
-      const standard = this.points[i];
-      const next = this.points[i + 1];
-      const afterNext = this.points[i + 2];
-
-      const crossPoduct =
-        (next.x - standard.x) * (afterNext.y - standard.y) -
-        (afterNext.x - standard.x) * (next.y - standard.y);
-
-      if (crossPoduct < 0) {
-        if (i === 0) {
-          ctx.moveTo(standard.x, standard.y);
-          stack.push(standard);
-        }
-        stack.push(next);
-        ctx.lineTo(next.x, next.y);
-        console.log(
-          "반시계",
-          this.points[i].index,
-          this.points[i + 1].index,
-          this.points[i + 2].index
-        );
-      } else if (crossPoduct > 0) {
-        console.log(
-          "시계",
-          this.points[i].index,
-          this.points[i + 1].index,
-          this.points[i + 2].index
-        );
-      }
+      ctx.lineTo(point.x, point.y);
     }
+
+    ctx.lineTo(stack[0].x, stack[0].y);
 
     ctx.stroke();
     ctx.closePath();
-
-    console.log(stack);
   }
 }
