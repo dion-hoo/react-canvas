@@ -1,3 +1,8 @@
+type boundaryType = {
+  x: number;
+  y: number;
+};
+
 export class Point {
   index: number;
   x: number;
@@ -9,6 +14,7 @@ export class Point {
   active: boolean;
   rgb: number;
   text: string;
+  inside: boolean;
 
   constructor(
     index: number,
@@ -27,6 +33,7 @@ export class Point {
     this.active = false;
     this.rgb = 0x000000;
     this.text = text;
+    this.inside = false;
   }
 
   update() {
@@ -34,48 +41,72 @@ export class Point {
     this.y += this.vy;
   }
 
-  windowCoolide() {
-    this.coolideArea(this.radius);
+  windowCoolide(boundary: boundaryType[] | undefined) {
+    this.coolideArea(this.radius, boundary);
   }
 
-  coolideArea(radius: number) {
-    if (this.x < radius || this.x > window.innerWidth - radius) {
-      this.vx *= -1;
-    }
+  coolideArea(radius: number, boundary: boundaryType[] | undefined) {
+    if (boundary) {
+      let isInside = false;
 
-    if (this.y < radius || this.y > window.innerHeight - radius) {
-      this.vy *= -1;
+      // Ray casting Algorithm
+      for (let i = 0, j = boundary.length - 1; i < boundary.length; j = i++) {
+        const x1 = boundary[i].x;
+        const y1 = boundary[i].y;
+
+        const x2 = boundary[j].x;
+        const y2 = boundary[j].y;
+
+        const x = this.x < x1 + ((this.y - y1) / (y2 - y1)) * (x2 - x1);
+        const y = this.y < y1 !== this.y < y2;
+        const intersect = x && y;
+
+        if (intersect) {
+          isInside = !isInside;
+        }
+      }
+
+      if (isInside) {
+        this.inside = true;
+      } else {
+        if (this.inside) {
+          this.vx *= -1;
+          this.vy *= -1;
+        } else {
+          if (this.x < radius || this.x > window.innerWidth - radius) {
+            this.vx *= -1;
+          }
+          if (this.y < radius || this.y > window.innerHeight - radius) {
+            this.vy *= -1;
+          }
+        }
+      }
     }
   }
 
-  drawStar(
+  star(
     ctx: CanvasRenderingContext2D,
-    cx: number,
-    cy: number,
-    spikes: number,
-    outerRadius: number,
-    innerRadius: number
+    x: number,
+    y: number,
+    sides: number,
+    innerRadius: number,
+    outerRadius: number
   ) {
-    let rot = (Math.PI / 2) * 3;
-    let x = cx;
-    let y = cy;
-    let step = Math.PI / spikes;
+    const angle = (Math.PI * 2) / sides;
 
-    ctx.moveTo(cx, cy - outerRadius);
+    let px, py;
 
-    for (let i = 0; i < spikes; i++) {
-      x = cx + Math.cos(rot) * outerRadius;
-      y = cy + Math.sin(rot) * outerRadius;
-      ctx.lineTo(x, y);
-      rot += step;
+    for (let i = 0; i < sides; i++) {
+      px = x + Math.cos(angle * i) * outerRadius;
+      py = y + Math.sin(angle * i) * outerRadius;
 
-      x = cx + Math.cos(rot) * innerRadius;
-      y = cy + Math.sin(rot) * innerRadius;
-      ctx.lineTo(x, y);
-      rot += step;
+      ctx.lineTo(px, py);
+
+      px = x + Math.cos(angle / 2 + angle * i) * innerRadius;
+      py = y + Math.sin(angle / 2 + angle * i) * innerRadius;
+
+      ctx.lineTo(px, py);
     }
-
-    ctx.lineTo(cx, cy - outerRadius);
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -92,7 +123,7 @@ export class Point {
       ctx.fillStyle = color;
 
       // star
-      this.drawStar(ctx, this.x, this.y, Math.random() * 3 + 125, 2, 80);
+      this.star(ctx, this.x, this.y, 200, 1, 50);
     } else {
       ctx.fillStyle = color;
       ctx.font = "800 40px system-ui";

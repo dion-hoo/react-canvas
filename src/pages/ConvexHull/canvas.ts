@@ -1,5 +1,6 @@
 import { Point } from "./Point";
 import { ConvexHull } from "./ConvexHull";
+import { PolygonWall } from "./PolygonWall";
 
 export class Canvas {
   canvas: HTMLCanvasElement;
@@ -10,6 +11,7 @@ export class Canvas {
   fpsTime: number;
   currentframe: number;
   alphabet: string[];
+  wall: PolygonWall | null;
 
   constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
     this.canvas = canvas;
@@ -20,6 +22,7 @@ export class Canvas {
     this.fpsTime = 1000 / this.fps;
     this.currentframe = 0;
     this.alphabet = [];
+    this.wall = null;
 
     this.init();
     this.resize();
@@ -79,6 +82,17 @@ export class Canvas {
 
       this.points.push(new Point(i, x, y, this.radius, text));
     }
+
+    const widthHalf = window.innerWidth / 2;
+    const heightHalf = window.innerHeight / 2;
+
+    this.wall = new PolygonWall(
+      widthHalf,
+      heightHalf,
+      5,
+      (heightHalf * 0.9) / 2,
+      heightHalf * 0.9
+    );
   }
 
   resize() {
@@ -90,10 +104,13 @@ export class Canvas {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    // 벽
+    this.wall?.draw(this.ctx);
+
     this.points.forEach((point) => {
       point.draw(this.ctx);
       point.update();
-      point.windowCoolide();
+      point.windowCoolide(this.wall?.boundary);
     });
 
     const convexHull = new ConvexHull(this.points);
