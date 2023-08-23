@@ -17,7 +17,7 @@ export class GetMetaBall {
     this.radius2 = p2.radius;
   }
 
-  init(ctx: CanvasRenderingContext2D) {
+  init(ctx: CanvasRenderingContext2D, fillStyle: string) {
     let angle1, angle2;
     const p1 = this.p1;
     const p2 = this.p2;
@@ -77,7 +77,7 @@ export class GetMetaBall {
     const edgeDx = edge1.x - edge3.x;
     const edgeDy = edge1.y - edge3.y;
     const edgeDistance = Math.sqrt(edgeDx * edgeDx + edgeDy * edgeDy);
-    const d = Math.min(v * 2.4, edgeDistance / totalRadius);
+    const d = Math.min(v * 2.3, edgeDistance / totalRadius);
     const HALF = Math.PI / 2;
 
     this.radius1 *= d;
@@ -104,7 +104,7 @@ export class GetMetaBall {
     };
 
     ctx.save();
-    ctx.fillStyle = "white";
+    ctx.fillStyle = fillStyle;
 
     ctx.beginPath();
     ctx.moveTo(edge1.x, edge1.y);
