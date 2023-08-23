@@ -26,8 +26,8 @@ export class Circle {
     this.vx = Math.random() * 1 - 0.5;
     this.vy = Math.random() * 1 - 0.5;
 
-    this.vx2 = Math.random() * 5 - 2;
-    this.vy2 = Math.random() * 5 - 2;
+    this.vx2 = Math.random() * 8 - 4;
+    this.vy2 = Math.random() * 8 - 4;
     this.fillStyle = "#fff";
 
     this.radius = radius;
@@ -68,11 +68,9 @@ export class Circle {
     }
   }
 
-  draw(ctx: CanvasRenderingContext2D, fillStyle: string) {
-    this.fillStyle = fillStyle;
-
+  draw(ctx: CanvasRenderingContext2D) {
     ctx.beginPath();
-    ctx.fillStyle = fillStyle;
+    ctx.fillStyle = this.fillStyle;
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
 
     ctx.fill();

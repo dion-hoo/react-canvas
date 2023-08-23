@@ -1,4 +1,5 @@
 import { Circle } from "./Circle";
+import { Font } from "./Font";
 import WebFont from "webfontloader";
 
 export class Canvas {
@@ -12,6 +13,7 @@ export class Canvas {
     offsetY: number;
   };
   circles: Circle[];
+  fonts: Font | null;
   fps2: number;
   fps: number;
   fpsTime: number;
@@ -35,8 +37,9 @@ export class Canvas {
       offsetY: 0,
     };
     this.circles = [];
+    this.fonts = null;
     this.fps = 10;
-    this.fps2 = 4;
+    this.fps2 = 3.4;
     this.fpsTime = 1000 / this.fps;
     this.fpsTime2 = 1000 / this.fps2;
     this.currentframe = 0;
@@ -106,7 +109,12 @@ export class Canvas {
   init() {
     this.circles = [];
 
-    this.makeCircle(20);
+    this.makeFont();
+    this.makeCircle(25);
+  }
+
+  makeFont() {
+    this.fonts = new Font(this.ctx, this.word);
   }
 
   makeCircle(length: number) {
@@ -150,6 +158,11 @@ export class Canvas {
 
       if (distance < c.radius) {
         this.mouse.index = c.index;
+
+        c.vx2 = 0;
+        c.vy2 = 0;
+
+        c.fillStyle = this.word[this.fonts!.colorIndex].color;
       }
     });
   }
@@ -171,41 +184,20 @@ export class Canvas {
   }
 
   onUp() {
+    const { index } = this.mouse;
     this.mouse.isDown = false;
+
+    if (index || index === 0) {
+      this.circles[index].vx2 = Math.random() * 8 - 4;
+      this.circles[index].vy2 = Math.random() * 8 - 4;
+    }
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.ctx.font = `800 ${this.canvas.height * 0.9}px system-ui`;
-
-    this.ctx.textAlign = "center";
-    this.ctx.textBaseline = "middle";
-
-    if (
-      this.currentframe > this.fpsTime &&
-      this.circles.length < 30 &&
-      this.mouse.isClick
-    ) {
-      this.ctx.fillStyle = "#000";
-    }
-
-    if (this.currentframe2 > this.fpsTime2) {
-      this.colorIndex += 1;
-      this.colorIndex %= this.word.length;
-
-      this.currentframe2 = 0;
-    }
-
-    if (!this.mouse.isClick) {
-      this.ctx.fillStyle = this.word[this.colorIndex].color;
-    }
-
-    this.ctx.fillText(
-      this.word[this.colorIndex].text,
-      this.canvas.width / 2,
-      this.canvas.height / 2
-    );
+    // font
+    this.fonts?.draw(this.mouse.isClick);
 
     this.circles.forEach((circle) => {
       if (this.mouse.isClick) {
@@ -213,11 +205,11 @@ export class Canvas {
         circle.stickness(this.circles);
       }
 
-      const fillStyle = this.mouse.isClick
-        ? this.word[this.colorIndex].color
-        : "#fff";
+      if (!this.mouse.isDown) {
+        circle.fillStyle = this.mouse.isClick ? "#eee" : "#222";
+      }
 
-      circle.draw(this.ctx, fillStyle);
+      circle.draw(this.ctx);
     });
 
     this.currentframe++;
