@@ -12,14 +12,12 @@ const MetaBall = () => {
 
       const c = new Canvas(canvas, context);
 
+      c.bind();
       c.resize();
       c.init();
       c.draw();
 
-      // window.addEventListener("resize", c.resize.bind(c));
-      // return () => {
-      //   window.removeEventListener("resize", c.resize.bind(c));
-      // };
+      return () => c.destroy();
     }
   }, []);
   return (
