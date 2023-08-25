@@ -1,6 +1,6 @@
 import { Circle } from "./Circle";
 
-const MAXDISTANCE = 200;
+const MAXDISTANCE = 250;
 
 export class GetMetaBall {
   p1: Circle;
@@ -17,7 +17,7 @@ export class GetMetaBall {
     this.radius2 = p2.radius;
   }
 
-  init(ctx: CanvasRenderingContext2D, fillStyle: string) {
+  init(ctx: CanvasRenderingContext2D, fillStyle: string | CanvasGradient) {
     let angle1, angle2;
     const p1 = this.p1;
     const p2 = this.p2;

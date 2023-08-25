@@ -1,6 +1,7 @@
 import { Circle } from "./Circle";
 import { Font } from "./Font";
 import WebFont from "webfontloader";
+import { Color } from "./Color";
 
 export class Canvas {
   canvas: HTMLCanvasElement;
@@ -14,12 +15,9 @@ export class Canvas {
   };
   circles: Circle[];
   fonts: Font | null;
-  fps2: number;
   fps: number;
   fpsTime: number;
-  fpsTime2: number;
   currentframe: number;
-  currentframe2: number;
   word: {
     text: string;
     color: string;
@@ -38,38 +36,35 @@ export class Canvas {
     };
     this.circles = [];
     this.fonts = null;
-    this.fps = 10;
-    this.fps2 = 3.4;
+    this.fps = 4.1;
     this.fpsTime = 1000 / this.fps;
-    this.fpsTime2 = 1000 / this.fps2;
     this.currentframe = 0;
-    this.currentframe2 = 0;
 
     this.colorIndex = 0;
     this.word = [
       {
         text: "A",
-        color: "#bb254a",
-      },
-      {
-        text: "B",
-        color: "#dd4851",
-      },
-      {
-        text: "C",
         color: "#f38138",
       },
       {
+        text: "B",
+        color: "#135b8f",
+      },
+      {
+        text: "C",
+        color: "#66648b",
+      },
+      {
         text: "D",
-        color: "#e35b8f",
+        color: "#1d4851",
       },
       {
         text: "E",
-        color: "#922f6e",
+        color: "#122f6e",
       },
       {
         text: "F",
-        color: "#66648b",
+        color: "#0095fa",
       },
       {
         text: "G",
@@ -110,7 +105,7 @@ export class Canvas {
     this.circles = [];
 
     this.makeFont();
-    this.makeCircle(25);
+    this.makeCircle(30);
   }
 
   makeFont() {
@@ -119,7 +114,7 @@ export class Canvas {
 
   makeCircle(length: number) {
     for (let i = 0; i < length; i++) {
-      const radius = Math.random() * 40 + 60;
+      const radius = 70;
       const x = Math.random() * (this.canvas.width - radius * 2) + radius;
       const y = Math.random() * (this.canvas.height - radius * 2) + radius;
 
@@ -161,8 +156,6 @@ export class Canvas {
 
         c.vx2 = 0;
         c.vy2 = 0;
-
-        c.fillStyle = this.word[this.fonts!.colorIndex].color;
       }
     });
   }
@@ -188,8 +181,8 @@ export class Canvas {
     this.mouse.isDown = false;
 
     if (index || index === 0) {
-      this.circles[index].vx2 = Math.random() * 8 - 4;
-      this.circles[index].vy2 = Math.random() * 8 - 4;
+      this.circles[index].vx2 = Math.random() * 1 - 0.5;
+      this.circles[index].vy2 = Math.random() * 1 - 0.5;
     }
   }
 
@@ -197,7 +190,7 @@ export class Canvas {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // font
-    this.fonts?.draw(this.mouse.isClick);
+    this.fonts?.draw(this.mouse.isClick, this.colorIndex);
 
     this.circles.forEach((circle) => {
       if (this.mouse.isClick) {
@@ -205,15 +198,24 @@ export class Canvas {
         circle.stickness(this.circles);
       }
 
-      if (!this.mouse.isDown) {
-        circle.fillStyle = this.mouse.isClick ? "#eee" : "#222";
-      }
+      const fillStyle = new Color(this.ctx, this.word, this.colorIndex);
+
+      // difference 확정
+      circle.fillStyle = this.mouse.isClick
+        ? fillStyle.getColor(0, 0, 0, "difference")
+        : "#222";
 
       circle.draw(this.ctx);
     });
 
+    if (this.currentframe > this.fpsTime) {
+      this.colorIndex += 1;
+      this.colorIndex %= this.word.length;
+
+      this.currentframe = 0;
+    }
+
     this.currentframe++;
-    this.currentframe2++;
 
     requestAnimationFrame(this.draw.bind(this));
   }
