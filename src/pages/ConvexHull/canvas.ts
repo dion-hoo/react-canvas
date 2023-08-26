@@ -1,5 +1,5 @@
-import { Point } from "./Point";
 import { ConvexHull } from "./ConvexHull";
+import { Point } from "./Point";
 import { PolygonWall } from "./PolygonWall";
 
 export class Canvas {

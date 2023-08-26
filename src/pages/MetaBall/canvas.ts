@@ -1,7 +1,7 @@
-import { Circle } from "./Circle";
-import { Font } from "./Font";
 import WebFont from "webfontloader";
+import { Circle } from "./Circle";
 import { Color } from "./Color";
+import { Font } from "./Font";
 
 export class Canvas {
   canvas: HTMLCanvasElement;

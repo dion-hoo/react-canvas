@@ -1,6 +1,10 @@
-import "./index.scss";
-import { Canvas } from "./canvas";
 import { useEffect, useRef } from "react";
+import { Canvas } from "./canvas";
+import classNames from "classnames/bind";
+
+import styles from "./index.module.scss";
+
+const cx = classNames.bind(styles);
 
 const ConvexHull = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -27,7 +31,7 @@ const ConvexHull = () => {
     }
   }, []);
   return (
-    <div className="wrap">
+    <div className={cx("wrap")}>
       <canvas id="canvas" ref={canvasRef}></canvas>
     </div>
   );

@@ -1,8 +1,8 @@
+import kakaoImage from "@/assets/img/kakao.jpg";
 import { Back } from "./Back";
 
 import { updatePoint } from "./UpdatePoint";
 
-import kakaoImage from "@/assets/img/kakao.jpg";
 
 export class Stickers {
   centerX: number;

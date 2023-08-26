@@ -1,6 +1,6 @@
+import kakaoGrayScaleImage from "@/assets/img/kakao_dark.jpg";
 import { StickerPoint } from "./StickerType";
 
-import kakaoGrayScaleImage from "@/assets/img/kakao_dark.jpg";
 
 export class Back {
   centerX: number;

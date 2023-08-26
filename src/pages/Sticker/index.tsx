@@ -1,10 +1,10 @@
+import { useRef, useEffect } from "react";
 import classNames from "classnames/bind";
 
-import { useRef, useEffect } from "react";
 
 import { Canvas } from "./Canvas";
 
-import styles from "./Sticker.module.scss";
+import styles from "./index.module.scss";
 
 const cx = classNames.bind(styles);
 

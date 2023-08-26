@@ -1,4 +1,4 @@
-import Sticker from "./Sticker";
+import Sticker from ".";
 
 export default {
   title: "ANIMATION/Sticker",

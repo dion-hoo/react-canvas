@@ -27,7 +27,7 @@ export class Color {
     this.ctx.shadowOffsetY = y;
     this.ctx.shadowBlur = blur;
 
-    var gradient = this.ctx.createLinearGradient(
+    const gradient = this.ctx.createLinearGradient(
       0,
       0,
       window.innerWidth,

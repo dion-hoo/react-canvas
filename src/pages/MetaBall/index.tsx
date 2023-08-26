@@ -1,6 +1,12 @@
 import { useEffect, useRef } from "react";
-import "./MetaBall.scss";
+
+import classNames from "classnames/bind";
+
+import styles from "./MetaBall.module.scss";
 import { Canvas } from "./canvas";
+
+
+const cx = classNames.bind(styles);
 
 const MetaBall = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,7 +27,7 @@ const MetaBall = () => {
     }
   }, []);
   return (
-    <div className="wrap">
+    <div className={cx("wrap")}>
       <canvas ref={canvasRef}></canvas>
     </div>
   );
