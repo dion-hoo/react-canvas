@@ -1,9 +1,9 @@
-import { Point } from "./Point";
+import { type Point } from './Point';
 
-type PointType = {
+interface PointType {
   x: number;
   y: number;
-};
+}
 
 export class ConvexHull {
   points: Point[];
@@ -90,7 +90,7 @@ export class ConvexHull {
     }
 
     // 선분 그리기
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
     ctx.beginPath();
 
     for (let i = 0; i < stack.length; i++) {

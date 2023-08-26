@@ -4,18 +4,12 @@ export class PolygonWall {
   sides: number;
   innerRadius: number;
   outerRadius: number;
-  boundary: {
+  boundary: Array<{
     x: number;
     y: number;
-  }[];
+  }>;
 
-  constructor(
-    x: number,
-    y: number,
-    sides: number,
-    innerRadius: number,
-    outerRadius: number
-  ) {
+  constructor(x: number, y: number, sides: number, innerRadius: number, outerRadius: number) {
     this.x = x;
     this.y = y;
     this.sides = sides;
@@ -31,7 +25,7 @@ export class PolygonWall {
     this.boundary = [];
 
     ctx.beginPath();
-    ctx.strokeStyle = "rgba(17, 204, 153, 0.2)";
+    ctx.strokeStyle = 'rgba(17, 204, 153, 0.2)';
 
     let px, py;
 

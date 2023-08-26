@@ -1,10 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
+import classNames from 'classnames/bind';
 
-import classNames from "classnames/bind";
-
-import styles from "./MetaBall.module.scss";
-import { Canvas } from "./canvas";
-
+import styles from './MetaBall.module.scss';
+import { Canvas } from './canvas';
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +12,7 @@ const MetaBall = () => {
   useEffect(() => {
     if (canvasRef.current) {
       const canvas = canvasRef.current;
-      const context = canvas.getContext("2d") as CanvasRenderingContext2D;
+      const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
       const c = new Canvas(canvas, context);
 
@@ -23,11 +21,13 @@ const MetaBall = () => {
       c.init();
       c.draw();
 
-      return () => c.destroy();
+      return () => {
+        c.destroy();
+      };
     }
   }, []);
   return (
-    <div className={cx("wrap")}>
+    <div className={cx('wrap')}>
       <canvas ref={canvasRef}></canvas>
     </div>
   );

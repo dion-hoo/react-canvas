@@ -1,4 +1,4 @@
-import { Points, mousePoint } from "./Point";
+import { Points, mousePoint } from './Point';
 
 const FORCE = 3.5;
 

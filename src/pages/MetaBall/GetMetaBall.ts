@@ -1,4 +1,4 @@
-import { Circle } from "./Circle";
+import { type Circle } from './Circle';
 
 const MAXDISTANCE = 250;
 
@@ -48,10 +48,8 @@ export class GetMetaBall {
 
     const a1 = angle + angle1 + (angleofDistance - angle1) * v;
     const a2 = angle - angle1 - (angleofDistance - angle1) * v;
-    const a3 =
-      angle + Math.PI - angle2 - (Math.PI - angleofDistance - angle2) * v;
-    const a4 =
-      angle - Math.PI + angle2 + (Math.PI - angleofDistance - angle2) * v;
+    const a3 = angle + Math.PI - angle2 - (Math.PI - angleofDistance - angle2) * v;
+    const a4 = angle - Math.PI + angle2 + (Math.PI - angleofDistance - angle2) * v;
 
     const edge1 = {
       x: p1.x + Math.cos(a1) * p1.radius,

@@ -1,4 +1,4 @@
-import { Stickers } from "./Stickers";
+import { Stickers } from './Stickers';
 
 export const Canvas = (
   canvas: HTMLCanvasElement,
@@ -68,17 +68,17 @@ export const Canvas = (
   };
 
   const eventListener = () => {
-    window.addEventListener("pointerdown", onDown);
-    window.addEventListener("pointermove", onMove);
-    window.addEventListener("pointerup", onUp);
-    window.addEventListener("resize", resize);
+    window.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('resize', resize);
   };
 
   const destroy = () => {
-    window.removeEventListener("pointerdown", onDown);
-    window.removeEventListener("pointermove", onMove);
-    window.removeEventListener("pointerup", onUp);
-    window.removeEventListener("resize", resize);
+    window.removeEventListener('pointerdown', onDown);
+    window.removeEventListener('pointermove', onMove);
+    window.removeEventListener('pointerup', onUp);
+    window.removeEventListener('resize', resize);
   };
 
   eventListener();

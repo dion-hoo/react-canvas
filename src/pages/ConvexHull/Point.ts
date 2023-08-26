@@ -1,7 +1,7 @@
-type boundaryType = {
+interface boundaryType {
   x: number;
   y: number;
-};
+}
 
 export class Point {
   index: number;
@@ -16,13 +16,7 @@ export class Point {
   text: string;
   inside: boolean;
 
-  constructor(
-    index: number,
-    x: number,
-    y: number,
-    radius: number,
-    text: string
-  ) {
+  constructor(index: number, x: number, y: number, radius: number, text: string) {
     this.index = index;
     this.x = x;
     this.y = y;
@@ -126,7 +120,7 @@ export class Point {
       this.star(ctx, this.x, this.y, 200, 1, 50);
     } else {
       ctx.fillStyle = color;
-      ctx.font = "800 40px system-ui";
+      ctx.font = '800 40px system-ui';
       ctx.fillText(this.text, this.x, this.y);
     }
 
