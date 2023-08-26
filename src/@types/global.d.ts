@@ -1,21 +1,21 @@
-declare module "*.svg" {
+declare module '*.svg' {
   const content: SVGAElement;
   export default content;
 }
 
-declare module "*.png" {
+declare module '*.png' {
   const value: string;
   export default value;
 }
 
-declare module "*.jpg" {
+declare module '*.jpg' {
   const value: string;
   export default value;
 }
 
-declare module "*.gif" {
+declare module '*.gif' {
   const value: string;
   export default value;
 }
 
-declare module "*.scss";
+declare module '*.scss';

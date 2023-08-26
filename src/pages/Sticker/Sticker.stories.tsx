@@ -1,7 +1,7 @@
-import Sticker from ".";
+import Sticker from '.';
 
 export default {
-  title: "ANIMATION/Sticker",
+  title: 'ANIMATION/Sticker',
   component: Sticker,
 };
 

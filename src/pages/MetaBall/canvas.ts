@@ -1,7 +1,8 @@
-import WebFont from "webfontloader";
-import { Circle } from "./Circle";
-import { Color } from "./Color";
-import { Font } from "./Font";
+import WebFont from 'webfontloader';
+
+import { Circle } from './Circle';
+import { Color } from './Color';
+import { Font } from './Font';
 
 export class Canvas {
   canvas: HTMLCanvasElement;
@@ -13,15 +14,17 @@ export class Canvas {
     offsetX: number;
     offsetY: number;
   };
+
   circles: Circle[];
   fonts: Font | null;
   fps: number;
   fpsTime: number;
   currentframe: number;
-  word: {
+  word: Array<{
     text: string;
     color: string;
-  }[];
+  }>;
+
   colorIndex: number;
 
   constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
@@ -43,62 +46,62 @@ export class Canvas {
     this.colorIndex = 0;
     this.word = [
       {
-        text: "A",
-        color: "#f38138",
+        text: 'A',
+        color: '#f38138',
       },
       {
-        text: "B",
-        color: "#135b8f",
+        text: 'B',
+        color: '#135b8f',
       },
       {
-        text: "C",
-        color: "#66648b",
+        text: 'C',
+        color: '#66648b',
       },
       {
-        text: "D",
-        color: "#1d4851",
+        text: 'D',
+        color: '#1d4851',
       },
       {
-        text: "E",
-        color: "#122f6e",
+        text: 'E',
+        color: '#122f6e',
       },
       {
-        text: "F",
-        color: "#0095fa",
+        text: 'F',
+        color: '#0095fa',
       },
       {
-        text: "G",
-        color: "#896b70",
+        text: 'G',
+        color: '#896b70',
       },
       {
-        text: "H",
-        color: "#939597",
+        text: 'H',
+        color: '#939597',
       },
     ];
 
     WebFont.load({
       google: {
-        families: ["Hind:700"],
+        families: ['Hind:700'],
       },
     });
   }
 
   bind() {
-    window.addEventListener("click", this.onClick.bind(this));
-    window.addEventListener("mousedown", this.onDown.bind(this));
-    window.addEventListener("mousemove", this.onMove.bind(this));
-    window.addEventListener("mouseup", this.onUp.bind(this));
+    window.addEventListener('click', this.onClick.bind(this));
+    window.addEventListener('mousedown', this.onDown.bind(this));
+    window.addEventListener('mousemove', this.onMove.bind(this));
+    window.addEventListener('mouseup', this.onUp.bind(this));
 
-    window.addEventListener("resize", this.resize.bind(this));
+    window.addEventListener('resize', this.resize.bind(this));
   }
 
   destroy() {
-    window.removeEventListener("click", this.onClick.bind(this));
-    window.removeEventListener("mousedown", this.onDown.bind(this));
-    window.removeEventListener("mousemove", this.onMove.bind(this));
-    window.removeEventListener("mouseup", this.onUp.bind(this));
+    window.removeEventListener('click', this.onClick.bind(this));
+    window.removeEventListener('mousedown', this.onDown.bind(this));
+    window.removeEventListener('mousemove', this.onMove.bind(this));
+    window.removeEventListener('mouseup', this.onUp.bind(this));
 
-    window.removeEventListener("resize", this.resize.bind(this));
+    window.removeEventListener('resize', this.resize.bind(this));
   }
 
   init() {
@@ -164,11 +167,9 @@ export class Canvas {
     if (this.mouse.isDown) {
       const { index } = this.mouse;
 
-      if (index || index === 0) {
-        this.circles[index].x =
-          this.circles[index].x + event.clientX - this.mouse.offsetX;
-        this.circles[index].y =
-          this.circles[index].y + event.clientY - this.mouse.offsetY;
+      if (index ?? index === 0) {
+        this.circles[index].x = this.circles[index].x + event.clientX - this.mouse.offsetX;
+        this.circles[index].y = this.circles[index].y + event.clientY - this.mouse.offsetY;
 
         this.mouse.offsetX = event.clientX;
         this.mouse.offsetY = event.clientY;
@@ -180,7 +181,7 @@ export class Canvas {
     const { index } = this.mouse;
     this.mouse.isDown = false;
 
-    if (index || index === 0) {
+    if (index ?? index === 0) {
       this.circles[index].vx2 = Math.random() * 1 - 0.5;
       this.circles[index].vy2 = Math.random() * 1 - 0.5;
     }
@@ -201,9 +202,7 @@ export class Canvas {
       const fillStyle = new Color(this.ctx, this.word, this.colorIndex);
 
       // difference 확정
-      circle.fillStyle = this.mouse.isClick
-        ? fillStyle.getColor(0, 0, 0, "difference")
-        : "#222";
+      circle.fillStyle = this.mouse.isClick ? fillStyle.getColor(0, 0, 0, 'difference') : '#222';
 
       circle.draw(this.ctx);
     });

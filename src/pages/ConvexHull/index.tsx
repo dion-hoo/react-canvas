@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import { Canvas } from "./canvas";
-import classNames from "classnames/bind";
+import { useEffect, useRef } from 'react';
+import classNames from 'classnames/bind';
 
-import styles from "./index.module.scss";
+import { Canvas } from './canvas';
+import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -12,18 +12,19 @@ const ConvexHull = () => {
   useEffect(() => {
     if (canvasRef.current) {
       const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
       const c = new Canvas(canvas, ctx);
+
       c.draw();
 
-      window.addEventListener("resize", () => {
+      window.addEventListener('resize', () => {
         c.resize();
         c.draw();
       });
 
       return () => {
-        window.removeEventListener("resize", () => {
+        window.removeEventListener('resize', () => {
           c.resize();
           c.draw();
         });
@@ -31,7 +32,7 @@ const ConvexHull = () => {
     }
   }, []);
   return (
-    <div className={cx("wrap")}>
+    <div className={cx('wrap')}>
       <canvas id="canvas" ref={canvasRef}></canvas>
     </div>
   );

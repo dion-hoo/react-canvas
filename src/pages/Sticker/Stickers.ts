@@ -1,8 +1,7 @@
-import kakaoImage from "@/assets/img/kakao.jpg";
-import { Back } from "./Back";
+import kakaoImage from '@/assets/img/kakao.jpg';
 
-import { updatePoint } from "./UpdatePoint";
-
+import { Back } from './Back';
+import { updatePoint } from './UpdatePoint';
 
 export class Stickers {
   centerX: number;
@@ -58,13 +57,7 @@ export class Stickers {
     ctx.clip();
 
     // image
-    ctx.drawImage(
-      this.image,
-      this.centerX,
-      this.centerY,
-      this.width,
-      this.height
-    );
+    ctx.drawImage(this.image, this.centerX, this.centerY, this.width, this.height);
     ctx.restore();
 
     // sticker back
@@ -78,7 +71,7 @@ export class Stickers {
     for (let v = 0; v < points.length; v++) {
       const { x, y } = points[v];
 
-      ctx.fillStyle = "red";
+      ctx.fillStyle = 'red';
       ctx.arc(x, y, 5, 0, Math.PI * 2);
       ctx.fill();
       ctx.closePath();

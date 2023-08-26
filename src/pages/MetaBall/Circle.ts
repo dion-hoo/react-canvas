@@ -1,4 +1,4 @@
-import { GetMetaBall } from "./GetMetaBall";
+import { GetMetaBall } from './GetMetaBall';
 
 export class Circle {
   ctx: CanvasRenderingContext2D;
@@ -12,13 +12,7 @@ export class Circle {
   vy2: number;
   fillStyle: string | CanvasGradient;
 
-  constructor(
-    ctx: CanvasRenderingContext2D,
-    index: number,
-    x: number,
-    y: number,
-    radius: number
-  ) {
+  constructor(ctx: CanvasRenderingContext2D, index: number, x: number, y: number, radius: number) {
     this.ctx = ctx;
     this.index = index;
     this.x = x;
@@ -28,7 +22,7 @@ export class Circle {
 
     this.vx2 = Math.random() * 7 - 4;
     this.vy2 = Math.random() * 7 - 4;
-    this.fillStyle = "#fff";
+    this.fillStyle = '#fff';
 
     this.radius = radius;
   }

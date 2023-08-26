@@ -1,7 +1,7 @@
-import MetaBallComp from "./index";
+import MetaBallComp from './index';
 
 export default {
-  title: "ANIMATION/MetaBall",
+  title: 'ANIMATION/MetaBall',
   component: MetaBallComp,
 };
 

@@ -1,7 +1,7 @@
-import ConvexHull from "./index";
+import ConvexHull from './index';
 
 export default {
-  title: "ANIMATION/ConvexHull",
+  title: 'ANIMATION/ConvexHull',
   component: ConvexHull,
 };
 

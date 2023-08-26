@@ -1,8 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Sticker, ConvexHull, MetaBall, NewSticker, Main } from "@/pages";
-
-import { PATH } from "@/urls/url";
+import { Sticker, ConvexHull, MetaBall, NewSticker, Main } from '@/pages';
+import { PATH } from '@/urls/url';
 
 export const App = () => {
   return (

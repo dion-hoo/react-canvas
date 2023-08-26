@@ -1,6 +1,6 @@
-import { ConvexHull } from "./ConvexHull";
-import { Point } from "./Point";
-import { PolygonWall } from "./PolygonWall";
+import { ConvexHull } from './ConvexHull';
+import { Point } from './Point';
+import { PolygonWall } from './PolygonWall';
 
 export class Canvas {
   canvas: HTMLCanvasElement;
@@ -43,42 +43,40 @@ export class Canvas {
   makePoint(length: number) {
     this.radius = Math.random() * 5 + 10;
     this.alphabet = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "W",
-      "X",
-      "Y",
-      "Z",
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
     ];
 
     const index = Math.floor(Math.random() * this.alphabet.length);
     const text = this.alphabet[index];
 
     for (let i = 0; i < length; i++) {
-      const x =
-        Math.random() * (window.innerWidth - this.radius * 2) + this.radius;
-      const y =
-        Math.random() * (window.innerHeight - this.radius * 2) + this.radius;
+      const x = Math.random() * (window.innerWidth - this.radius * 2) + this.radius;
+      const y = Math.random() * (window.innerHeight - this.radius * 2) + this.radius;
 
       this.points.push(new Point(i, x, y, this.radius, text));
     }
@@ -86,13 +84,7 @@ export class Canvas {
     const widthHalf = window.innerWidth / 2;
     const heightHalf = window.innerHeight / 2;
 
-    this.wall = new PolygonWall(
-      widthHalf,
-      heightHalf,
-      5,
-      (heightHalf * 0.9) / 2,
-      heightHalf * 0.9
-    );
+    this.wall = new PolygonWall(widthHalf, heightHalf, 5, (heightHalf * 0.9) / 2, heightHalf * 0.9);
   }
 
   resize() {
