@@ -5,13 +5,11 @@
   },
   "extends": [
     "standard-with-typescript",
-    "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:prettier/recommended",
-    "prettier",
-    "prettier/prettier"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,7 +17,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "import", "@typescript-eslint"],
+  "plugins": ["import", "@typescript-eslint"],
   "rules": {
     "import/extensions": [
       "error",
@@ -31,7 +29,6 @@
     ],
     "@typescript-eslint/strict-boolean-expressions": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-uses-vars": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "import/order": [
       "error",
