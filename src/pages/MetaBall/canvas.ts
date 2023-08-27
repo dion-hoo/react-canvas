@@ -88,18 +88,18 @@ export class Canvas {
 
   bind() {
     window.addEventListener('click', this.onClick.bind(this));
-    window.addEventListener('mousedown', this.onDown.bind(this));
-    window.addEventListener('mousemove', this.onMove.bind(this));
-    window.addEventListener('mouseup', this.onUp.bind(this));
+    window.addEventListener('pointerdown', this.onDown.bind(this));
+    window.addEventListener('pointermove', this.onMove.bind(this));
+    window.addEventListener('pointerup', this.onUp.bind(this));
 
     window.addEventListener('resize', this.resize.bind(this));
   }
 
   destroy() {
     window.removeEventListener('click', this.onClick.bind(this));
-    window.removeEventListener('mousedown', this.onDown.bind(this));
-    window.removeEventListener('mousemove', this.onMove.bind(this));
-    window.removeEventListener('mouseup', this.onUp.bind(this));
+    window.removeEventListener('pointerdown', this.onDown.bind(this));
+    window.removeEventListener('pointermove', this.onMove.bind(this));
+    window.removeEventListener('pointerup', this.onUp.bind(this));
 
     window.removeEventListener('resize', this.resize.bind(this));
   }
