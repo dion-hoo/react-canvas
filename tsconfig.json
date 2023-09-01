@@ -17,7 +17,7 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "declaration": true,
-    "types": ["react/next", "react-dom/next"],
+    "types": ["react/next", "react-dom/next", "node"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

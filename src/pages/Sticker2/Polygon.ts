@@ -1,4 +1,5 @@
 import { type PolgonType } from './@types/point';
+import {  MouseType} from './@types/mouse';
 
 export class Polygon {
   x: number;
@@ -7,6 +8,8 @@ export class Polygon {
   rotate: number;
   radius1: number;
   radius2: number;
+  moveX: number;
+  moveY: number;
 
   points: PolgonType;
 
@@ -24,7 +27,9 @@ export class Polygon {
     this.rotate = rotate;
     this.radius1 = radius1;
     this.radius2 = radius2;
-
+    this.moveX = 0;
+    this.moveY = 0;
+ 
     this.points = {
       data: [],
       startX: 0,
@@ -33,15 +38,30 @@ export class Polygon {
     };
   }
 
-  rayCasting() {}
+  update(mouse: MouseType) {
+    const { offsetX, offsetY, moveX, moveY } = mouse;
 
-  getPoint() {
-    this.points.rotate = this.rotate;
-    this.points.startX = this.x;
-    this.points.startY = this.y;
+    // console.log(offsetX - this.radius1)
 
-    return this.points;
+
+    this.points.data.forEach((d, index) => {
+      const dx = d.x - (offsetX - this.radius1);
+      const dy = d.y - (offsetY - this.radius1);
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const MAXDISTANCE = 100;
+
+
+      if(distance < MAXDISTANCE) {
+        // console.log(index);
+      }
+    })
+
+
+    this.moveX = moveX;
+    this.moveY = moveY;
   }
+
+
 
   draw(ctx: CanvasRenderingContext2D) {
     const angle = (Math.PI * 2) / this.sides;
@@ -58,7 +78,7 @@ export class Polygon {
       const x = Math.cos(angle * i) * radius;
       const y = Math.sin(angle * i) * radius;
 
-      ctx.lineTo(x, y);
+      ctx.lineTo(x , y);
 
       this.points.data.push({
         x,

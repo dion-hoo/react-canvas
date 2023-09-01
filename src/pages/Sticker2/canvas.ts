@@ -1,5 +1,5 @@
-import { Polygon } from './Polygon';
-import { type MouseType } from './@types/mouse';
+import { Polygon } from "./Polygon";
+import { type MouseType } from "./@types/mouse";
 
 export class Canvas {
   canvas: HTMLCanvasElement;
@@ -24,7 +24,7 @@ export class Canvas {
     const x = window.innerWidth * 0.5;
     const y = window.innerHeight * 0.5;
     const sides = 4;
-    const rotate = 0;
+    const rotate = 45;
     const radius = 300;
 
     this.polygon = new Polygon(x, y, sides, rotate, radius);
@@ -43,15 +43,15 @@ export class Canvas {
   }
 
   bind() {
-    window.addEventListener('pointerdown', this.onDown.bind(this));
-    window.addEventListener('pointermove', this.onMove.bind(this));
-    window.addEventListener('pointerup', this.onUp.bind(this));
+    window.addEventListener("pointerdown", this.onDown.bind(this));
+    window.addEventListener("pointermove", this.onMove.bind(this));
+    window.addEventListener("pointerup", this.onUp.bind(this));
   }
 
   destory() {
-    window.removeEventListener('pointerdown', this.onDown.bind(this));
-    window.removeEventListener('pointermove', this.onMove.bind(this));
-    window.removeEventListener('pointerup', this.onUp.bind(this));
+    window.removeEventListener("pointerdown", this.onDown.bind(this));
+    window.removeEventListener("pointermove", this.onMove.bind(this));
+    window.removeEventListener("pointerup", this.onUp.bind(this));
   }
 
   onDown(event: PointerEvent) {
@@ -65,9 +65,6 @@ export class Canvas {
     if (this.mouse.isDown) {
       this.mouse.moveX = event.clientX - this.mouse.offsetX;
       this.mouse.moveY = event.clientY - this.mouse.offsetY;
-
-      this.mouse.offsetX = event.clientX;
-      this.mouse.offsetY = event.clientY;
     }
   }
 
@@ -77,9 +74,16 @@ export class Canvas {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    // standard object
-    this.polygon?.draw(this.ctx);
 
-    // requestAnimationFrame(this.draw.bind(this));
+    if (this.polygon) {
+      this.polygon.draw(this.ctx);
+
+      if (this.mouse.isDown) {
+        this.polygon.update(this.mouse);
+        1;
+      }
+    }
+
+    requestAnimationFrame(this.draw.bind(this));
   }
 }
