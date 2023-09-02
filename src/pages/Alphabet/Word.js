@@ -9,10 +9,11 @@ export class Word {
 
     this.points = [];
     this.index = 0;
+    this.prevIndex = 0;
     this.ratio = 0;
 
     this.fps = 10;
-    this.time = 200;
+    this.time = 150;
     this.fpsTime = this.time / this.fps;
 
     this.image = new CreateImage();
@@ -33,8 +34,6 @@ export class Word {
       this.init = true;
     }
 
-    this.index = Math.floor(this.ratio);
-
     const now = t - this.prevTime;
     if (
       this.init ||
@@ -44,12 +43,20 @@ export class Word {
       this.prevTime = t;
       this.ratio = t / this.time;
 
-      if (this.exceptPoints.includes(this.index)) {
-        console.log(this.ratio);
+      if (parseInt(this.ratio) > this.prevIndex) {
+        this.index++;
+        this.prevIndex++;
       }
 
+      // except point
+      if (this.exceptPoints.includes(this.index)) {
+        this.index++;
+      }
+
+      const maxPathLength = this.word.length - 1;
       const pattern = new Pattern(this.index, this.word);
-      this.points.push(pattern.draw(this.ratio));
+
+      this.points.push(pattern.draw(this.ratio, maxPathLength));
     }
 
     this.drawPath(ctx);
@@ -64,9 +71,15 @@ export class Word {
         this.image.draw(ctx, cx, cy);
       } else {
         ctx.beginPath();
+
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.imageSmoothingEnabled = true;
+
         const index = i - 1 < 0 ? i : i - 1;
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "yellow";
+
+        ctx.lineWidth = 30;
+        ctx.strokeStyle = "#000";
         ctx.moveTo(this.points[index].x, this.points[index].y);
         ctx.lineTo(cx, cy);
         ctx.stroke();
@@ -77,26 +90,21 @@ export class Word {
 
   draw(ctx) {
     // const fontSize = 700;
-
     // ctx.textAlign = "center";
     // ctx.textBaseline = "middle";
     // ctx.font = `700 ${fontSize}px system-ui`;
-
     // const x = window.innerWidth * 0.5;
     // const y = window.innerHeight * 0.5;
-
     // ctx.fillStyle = "#000";
     // ctx.fillText(this.text, x, y);
-
-    // path
-    ctx.fillStyle = "red";
-    ctx.beginPath();
-    for (let i = 0; i < this.word.length; i++) {
-      const w = this.word[i];
-
-      ctx.arc(w.x, w.y, 8, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.closePath();
-    }
+    // path;
+    // ctx.fillStyle = "red";
+    // ctx.beginPath();
+    // for (let i = 0; i < this.word.length; i++) {
+    //   const w = this.word[i];
+    //   ctx.arc(w.x, w.y, 3, 0, Math.PI * 2);
+    //   ctx.fill();
+    //   ctx.closePath();
+    // }
   }
 }

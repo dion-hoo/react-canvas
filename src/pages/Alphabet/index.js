@@ -37,7 +37,6 @@ const animate = (time) => {
   if (mouse.isClick) {
     const deltaTime = Math.abs(time - clickTimeStamp);
     word.update(ctx, deltaTime);
-    // console.log(word.word.length);
   }
 
   word.draw(ctx);

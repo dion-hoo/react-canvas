@@ -7,7 +7,7 @@ export class A extends Common {
 
     const u = new Util();
 
-    this.exceptPoints = [4];
+    this.exceptPoints = [4, 6];
     this.coord = [
       { x: this.width * 0.35, y: 830 },
       {
@@ -28,6 +28,9 @@ export class A extends Common {
         x: u.lerp(this.width * 0.5, this.width * 0.65, 0.5),
         y: u.lerp(400, 830, 0.5),
       },
+
+      { x: this.width * 0.35, y: 830 },
+      { x: this.width * 0.65, y: 830 },
     ];
   }
 }

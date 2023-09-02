@@ -7,8 +7,17 @@ export class Pattern {
     this.util = new Util();
   }
 
-  draw(t) {
-    let time = parseInt(t) !== this.index ? 1 : (t %= 1);
+  draw(t, maxPathLength) {
+    // last index
+    if (this.index === maxPathLength) {
+      const length = this.points.length - 1;
+      return {
+        x: this.points[length].x,
+        y: this.points[length].y,
+      };
+    }
+
+    let time = (t %= 1);
     let index = this.index;
 
     const p0 = this.points[index];
