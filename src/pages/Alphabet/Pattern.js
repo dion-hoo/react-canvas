@@ -8,8 +8,7 @@ export class Pattern {
   }
 
   draw(t) {
-    // let time = parseInt(t) !== this.index ? 1 : (t %= 1);
-    let time = (t %= 1);
+    let time = parseInt(t) !== this.index ? 1 : (t %= 1);
     let index = this.index;
 
     const p0 = this.points[index];

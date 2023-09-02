@@ -16,6 +16,12 @@ export class Word {
     this.fpsTime = this.time / this.fps;
 
     this.image = new CreateImage();
+
+    const alphabet = new Alphabet(this.text);
+    const { coord, exceptPoints } = alphabet.draw();
+
+    this.word = coord;
+    this.exceptPoints = exceptPoints;
   }
 
   update(ctx, t) {
@@ -38,12 +44,12 @@ export class Word {
       this.prevTime = t;
       this.ratio = t / this.time;
 
-      if (!this.exceptPoints.includes(this.index)) {
-        const pattern = new Pattern(this.index, this.word);
-        this.points.push(pattern.draw(this.ratio));
-      } else {
-        console.log(this.index);
+      if (this.exceptPoints.includes(this.index)) {
+        console.log(this.ratio);
       }
+
+      const pattern = new Pattern(this.index, this.word);
+      this.points.push(pattern.draw(this.ratio));
     }
 
     this.drawPath(ctx);
@@ -55,7 +61,7 @@ export class Word {
       const cy = this.points[i].y;
 
       if (this.isImage) {
-        this.image.draw(ctx);
+        this.image.draw(ctx, cx, cy);
       } else {
         ctx.beginPath();
         const index = i - 1 < 0 ? i : i - 1;
@@ -70,25 +76,17 @@ export class Word {
   }
 
   draw(ctx) {
-    const alphabet = new Alphabet(this.text);
-    const { coord, exceptPoints } = alphabet.draw();
+    // const fontSize = 700;
 
-    this.word = coord;
-    this.exceptPoints = exceptPoints;
+    // ctx.textAlign = "center";
+    // ctx.textBaseline = "middle";
+    // ctx.font = `700 ${fontSize}px system-ui`;
 
-    /////////////////////////////////// =======================================================////////////////////////////////////////
+    // const x = window.innerWidth * 0.5;
+    // const y = window.innerHeight * 0.5;
 
-    const fontSize = 700;
-
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = `700 ${fontSize}px system-ui`;
-
-    const x = window.innerWidth * 0.5;
-    const y = window.innerHeight * 0.5;
-
-    ctx.fillStyle = "#000";
-    ctx.fillText(this.text, x, y);
+    // ctx.fillStyle = "#000";
+    // ctx.fillText(this.text, x, y);
 
     // path
     ctx.fillStyle = "red";

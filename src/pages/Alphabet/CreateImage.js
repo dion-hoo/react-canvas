@@ -13,7 +13,7 @@ export class CreateImage {
     };
   }
 
-  draw(ctx) {
+  draw(ctx, cx, cy) {
     ctx.drawImage(
       this.image,
       0,

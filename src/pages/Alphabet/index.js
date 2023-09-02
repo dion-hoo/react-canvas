@@ -20,7 +20,7 @@ const resize = () => {
   ctx.scale(ratio, ratio);
 
   word = new Word({
-    text: "C",
+    text: "A",
     isImage: false,
   });
 };
@@ -37,6 +37,7 @@ const animate = (time) => {
   if (mouse.isClick) {
     const deltaTime = Math.abs(time - clickTimeStamp);
     word.update(ctx, deltaTime);
+    // console.log(word.word.length);
   }
 
   word.draw(ctx);
