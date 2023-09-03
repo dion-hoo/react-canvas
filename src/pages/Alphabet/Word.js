@@ -19,10 +19,13 @@ export class Word {
     this.image = new CreateImage();
 
     const alphabet = new Alphabet(this.text);
-    const { coord, exceptPoints } = alphabet.draw();
+    const { coord, exceptPoints, passPoints } = alphabet.draw();
 
     this.word = coord;
+    this.passPoints = passPoints;
     this.exceptPoints = exceptPoints;
+    this.exceptIndex = [];
+    this.totalCount = 0;
   }
 
   update(ctx, t) {
@@ -35,28 +38,43 @@ export class Word {
     }
 
     const now = t - this.prevTime;
-    if (
-      this.init ||
-      (now > this.fpsTime && this.index < this.word.length - 1)
-    ) {
+    const pathLength = this.word.length - 1;
+    if (this.init || (now > this.fpsTime && this.index < pathLength)) {
       this.init = false;
       this.prevTime = t;
       this.ratio = t / this.time;
 
+      // index update
       if (parseInt(this.ratio) > this.prevIndex) {
         this.index++;
         this.prevIndex++;
       }
 
-      // except point
-      if (this.exceptPoints.includes(this.index)) {
+      // pass point
+      if (this.passPoints.includes(this.index)) {
         this.index++;
       }
 
-      const maxPathLength = this.word.length - 1;
+      // except point
+      if (this.exceptPoints.includes(this.index)) {
+        this.exceptIndex.push(this.totalCount);
+        this.index++;
+      }
+
+      this.totalCount++;
+
+      if (this.index >= pathLength) {
+        this.points.push({
+          x: this.word[pathLength].x,
+          y: this.word[pathLength].y,
+        });
+
+        return false;
+      }
+
       const pattern = new Pattern(this.index, this.word);
 
-      this.points.push(pattern.draw(this.ratio, maxPathLength));
+      this.points.push(pattern.draw(this.ratio));
     }
 
     this.drawPath(ctx);
@@ -76,9 +94,11 @@ export class Word {
         ctx.lineCap = "round";
         ctx.imageSmoothingEnabled = true;
 
-        const index = i - 1 < 0 ? i : i - 1;
+        const exceptIndex = this.exceptIndex.includes(i);
 
-        ctx.lineWidth = 30;
+        const index = i - 1 < 0 || exceptIndex ? i : i - 1;
+
+        ctx.lineWidth = 4;
         ctx.strokeStyle = "#000";
         ctx.moveTo(this.points[index].x, this.points[index].y);
         ctx.lineTo(cx, cy);
@@ -89,22 +109,14 @@ export class Word {
   }
 
   draw(ctx) {
-    // const fontSize = 700;
-    // ctx.textAlign = "center";
-    // ctx.textBaseline = "middle";
-    // ctx.font = `700 ${fontSize}px system-ui`;
-    // const x = window.innerWidth * 0.5;
-    // const y = window.innerHeight * 0.5;
-    // ctx.fillStyle = "#000";
-    // ctx.fillText(this.text, x, y);
     // path;
-    // ctx.fillStyle = "red";
-    // ctx.beginPath();
-    // for (let i = 0; i < this.word.length; i++) {
-    //   const w = this.word[i];
-    //   ctx.arc(w.x, w.y, 3, 0, Math.PI * 2);
-    //   ctx.fill();
-    //   ctx.closePath();
-    // }
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    for (let i = 0; i < this.word.length; i++) {
+      const w = this.word[i];
+      ctx.arc(w.x, w.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.closePath();
+    }
   }
 }

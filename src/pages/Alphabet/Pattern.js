@@ -7,16 +7,7 @@ export class Pattern {
     this.util = new Util();
   }
 
-  draw(t, maxPathLength) {
-    // last index
-    if (this.index === maxPathLength) {
-      const length = this.points.length - 1;
-      return {
-        x: this.points[length].x,
-        y: this.points[length].y,
-      };
-    }
-
+  draw(t) {
     let time = (t %= 1);
     let index = this.index;
 

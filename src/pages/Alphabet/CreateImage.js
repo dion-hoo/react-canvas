@@ -20,10 +20,10 @@ export class CreateImage {
       0,
       this.image.width,
       this.image.height,
-      cx - 25,
-      cy - 50,
-      50,
-      50
+      cx - 15,
+      cy - 15,
+      30,
+      30
     );
   }
 }

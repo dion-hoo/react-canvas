@@ -1,36 +1,33 @@
 import { Util } from "../Util.js";
 import { Common } from "./Common.js";
 
-export class A extends Common {
+export class a extends Common {
   constructor() {
     super();
 
     const u = new Util();
 
-    this.exceptPoints = [4, 6];
+    // this.passPoints = [2, 4];
     this.coord = [
-      { x: this.width * 0.35, y: 830 },
-      {
-        x: u.lerp(this.width * 0.35, this.width * 0.5, 0.5),
-        y: u.lerp(830, 400, 0.5),
-      },
-      { x: this.width * 0.5, y: 400 },
-      {
-        x: u.lerp(this.width * 0.5, this.width * 0.65, 0.5),
-        y: u.lerp(400, 830, 0.5),
-      },
-      { x: this.width * 0.65, y: 830 },
-      {
-        x: u.lerp(this.width * 0.35, this.width * 0.5, 0.5),
-        y: u.lerp(830, 400, 0.5),
-      },
-      {
-        x: u.lerp(this.width * 0.5, this.width * 0.65, 0.5),
-        y: u.lerp(400, 830, 0.5),
-      },
+      { x: 650, y: 800 },
+      { x: 650, y: 850 },
 
-      { x: this.width * 0.35, y: 830 },
-      { x: this.width * 0.65, y: 830 },
+      { x: u.lerp(650, 600, 0.5), y: u.lerp(850, 900, 0.5) },
+
+      { x: 600, y: 900 },
+
+      { x: u.lerp(600, 550, 0.5), y: u.lerp(900, 850, 0.5) },
+
+      { x: 550, y: 850 },
+
+      { x: u.lerp(550, 600, 0.5), y: u.lerp(850, 800, 0.5) },
+
+      { x: 600, y: 800 },
+
+      { x: u.lerp(600, 650, 0.5), y: u.lerp(800, 850, 0.5) },
+
+      { x: 650, y: 850 },
+      { x: 650, y: 900 },
     ];
   }
 }

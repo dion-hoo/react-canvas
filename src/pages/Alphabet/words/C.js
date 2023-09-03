@@ -4,15 +4,15 @@ export class C extends Common {
   constructor() {
     super();
 
-    this.exceptPoints = [1, 3, 5];
+    this.passPoints = [1, 3, 5];
     this.coord = [
-      { type: "curve", x: this.width * 0.69, y: 465 },
-      { x: this.width * 0.49, y: 385 },
-      { type: "curve", x: this.width * 0.42, y: 550 },
-      { x: this.width * 0.4, y: 650 },
-      { type: "curve", x: this.width * 0.44, y: 720 },
-      { x: this.width * 0.49, y: 820 },
-      { x: this.width * 0.68, y: 760 },
+      { type: "curve", x: 380, y: 590 },
+      { x: 340, y: 580 },
+      { type: "curve", x: 310, y: 605 },
+      { x: 300, y: 650 },
+      { type: "curve", x: 315, y: 685 },
+      { x: 345, y: 695 },
+      { x: 380, y: 690 },
     ];
   }
 }
