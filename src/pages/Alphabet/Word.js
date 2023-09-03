@@ -6,13 +6,15 @@ export class Word {
   constructor(info) {
     this.text = info.text;
     this.isImage = info.isImage;
+    this.color = info.color;
+    this.test = info.test ?? 1;
 
     this.points = [];
     this.index = 0;
     this.prevIndex = 0;
     this.ratio = 0;
 
-    this.fps = 10;
+    this.fps = this.test === 1 ? (this.isImage ? 4 : 40) : 10;
     this.time = 150;
     this.fpsTime = this.time / this.fps;
 
@@ -98,11 +100,21 @@ export class Word {
 
         const index = i - 1 < 0 || exceptIndex ? i : i - 1;
 
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = "#000";
-        ctx.moveTo(this.points[index].x, this.points[index].y);
-        ctx.lineTo(cx, cy);
-        ctx.stroke();
+        if (this.test === 1) {
+          ctx.lineWidth = 15;
+          ctx.strokeStyle = this.color;
+
+          ctx.moveTo(this.points[index].x, this.points[index].y);
+          ctx.lineTo(cx, cy);
+          ctx.stroke();
+        } else {
+          ctx.lineWidth = 50;
+          ctx.strokeStyle = this.color;
+          ctx.moveTo(this.points[index].x, this.points[index].y);
+          ctx.lineTo(cx, cy);
+          ctx.stroke();
+        }
+
         ctx.closePath();
       }
     }
